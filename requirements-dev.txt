@@ -1,0 +1,3 @@
+# Local development helpers (NOT needed at runtime on Vercel).
+-r requirements.txt
+python-dotenv==1.0.1

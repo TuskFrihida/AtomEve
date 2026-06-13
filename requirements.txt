@@ -1,0 +1,4 @@
+# Runtime dependencies for the AtomEve Discord bot (Vercel serverless functions)
+Flask==3.0.3
+PyNaCl==1.5.0
+requests==2.32.3
