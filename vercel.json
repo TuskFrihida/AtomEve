@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/interactions.py": {
+      "includeFiles": "src/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/api/interactions" }
+  ]
+}
