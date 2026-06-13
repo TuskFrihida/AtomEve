@@ -34,9 +34,14 @@ PONG = 1
 CHANNEL_MESSAGE_WITH_SOURCE = 4
 
 
-@app.route("/api/interactions", methods=["POST"])
-def interactions():
-    """Validate and handle a single Discord interaction."""
+@app.route("/", defaults={"path": ""}, methods=["POST"])
+@app.route("/<path:path>", methods=["POST"])
+def interactions(path: str):
+    """Validate and handle a single Discord interaction.
+
+    Registered as a catch-all POST handler so it responds no matter how
+    Vercel forwards the request path (``/`` or ``/api/interactions``).
+    """
     signature = request.headers.get("X-Signature-Ed25519", "")
     timestamp = request.headers.get("X-Signature-Timestamp", "")
     raw_body = request.get_data()  # raw bytes — required for signature checks.
@@ -59,7 +64,8 @@ def interactions():
     return jsonify({"type": PONG})
 
 
-@app.route("/api/interactions", methods=["GET"])
-def health():
+@app.route("/", defaults={"path": ""}, methods=["GET"])
+@app.route("/<path:path>", methods=["GET"])
+def health(path: str):
     """A simple health page so visiting the URL in a browser is friendly."""
     return jsonify({"name": "AtomEve", "status": "online"})
